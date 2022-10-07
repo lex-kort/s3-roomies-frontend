@@ -8,7 +8,7 @@ function Listings(){
         axios.get("http://localhost:8080/api/listings").then((response) => {
             setListings(response.data.listings);
         });
-    });
+    }, []);
 
     return(
         <>
