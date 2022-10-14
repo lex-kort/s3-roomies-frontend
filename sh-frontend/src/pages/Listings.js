@@ -1,21 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import ListingCRUD from '../services/crud/ListingCRUD';
 
 function Listings(){
     const [listings, setListings] = useState([]);
 
+    const applyFilter = () => {
+        const fetchData = async () => {
+            const result = await ListingCRUD.getFilteredListings({ 
+                params : {
+                    pets: false
+                }
+            });
+            setListings(result.data);
+        }
+        fetchData();
+    }
+
     useEffect(() => {
-        axios.get("http://localhost:8080/api/listings").then((response) => {
-            setListings(response.data.listings);
-        });
+        const fetchData = async () => {
+            const result = await ListingCRUD.getActiveListings();
+            setListings(result.data);
+        }
+        fetchData();
     }, []);
 
     return(
         <>
             <h2>This is a listings page.</h2>
             {listings.map(listing => (
-                <p>{listing.address}</p>
+                <p key={listing.id}>{listing.address}</p>
             ))}
+            <button onClick={applyFilter}>Apply filter</button>
         </>
     )
 }
