@@ -26,9 +26,17 @@ function Listings(){
 
     return(
         <>
-            <h2>This is a listings page.</h2>
+            <h2>All available listings</h2>
             {listings.map(listing => (
-                <p key={listing.id}>{listing.address}</p>
+                <div key={listing.id} className='card'>
+                    <div className='card-body'>
+                        <h5 className='card-title'>{listing.address}</h5>
+                        <p className='card-text'>{listing.city}, {listing.neighborhood}</p>
+                        <p className=''>Rent: &euro;{listing.rent.toFixed(2)},-</p>
+                        <p className=''>Surface area: {listing.surfaceArea}m&sup2;</p>
+                        <p className=''>Pets allowed: {listing.petsAllowed ? "yes" : "no"}</p>
+                    </div>
+                </div>
             ))}
             <button onClick={applyFilter}>Apply filter</button>
         </>

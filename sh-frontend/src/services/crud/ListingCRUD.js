@@ -1,14 +1,14 @@
 import url from "../BaseURL.js";
 
-const listURL = "/listings";
+const compURL = "/listings";
 
 const getActiveListings = () => {    
-    return url.get(listURL);
+    return url.get(compURL);
 };
 
 const getFilteredListings = data => {
     console.log(data);
-    return url.get(listURL, data)
+    return url.get(compURL, data)
 }
 
 const ListingCRUD = {
