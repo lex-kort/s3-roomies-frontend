@@ -7,7 +7,6 @@ const getActiveListings = () => {
 };
 
 const getFilteredListings = data => {
-    console.log(data);
     return url.get(compURL, data)
 }
 
