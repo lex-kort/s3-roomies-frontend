@@ -7,12 +7,17 @@ const getActiveListings = () => {
 };
 
 const getFilteredListings = data => {
-    return url.get(compURL, data)
+    return url.get(compURL, data);
+};
+
+const getListing = id => {
+    return url.get(compURL + "/" + id)
 }
 
 const ListingCRUD = {
     getActiveListings,
-    getFilteredListings
+    getFilteredListings,
+    getListing
 };
 
 export default ListingCRUD;
