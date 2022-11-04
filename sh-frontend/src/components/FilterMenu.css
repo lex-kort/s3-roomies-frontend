@@ -1,0 +1,7 @@
+.sidebar {
+    background-color: pink;
+    position: relative;
+    width: 100%;
+    max-width: 350px;
+    height: 100%;
+}
