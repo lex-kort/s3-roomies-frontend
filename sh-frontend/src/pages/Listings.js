@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import "./Listings.css";
 
 // Services
-import ListingCRUD from '../services/crud/ListingCRUD';
+import ListingCRUD from '../services/ListingCRUD';
 
 // Components
 import FilterMenu from '../components/FilterMenu';
@@ -14,11 +14,12 @@ function Listings(){
 
     const applyFilter = () => {
         (async () => {
-            const result = await ListingCRUD.getFilteredListings({ 
-                params : {
-                    pets: false
+            const result = await ListingCRUD.getFilteredListings(
+                {
+                    minArea : 16,
+                    pets : false,
                 }
-            });
+            );
             setListings(result.data);
         })();
     }

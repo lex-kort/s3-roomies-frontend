@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 // Services
-import ListingCRUD from '../services/crud/ListingCRUD';
+import ListingCRUD from '../services/ListingCRUD';
 
 // Styling
 import "./Details.css";
