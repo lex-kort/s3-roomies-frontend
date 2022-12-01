@@ -8,6 +8,7 @@ import Listings from './pages/Listings.js';
 import Account from './pages/Account.js';
 import Login from './pages/Login.js';
 import Details from './pages/Details.js';
+import Logout from './pages/Logout';
 
 // Component
 import Navbar from './components/Navbar.js';
@@ -23,6 +24,7 @@ function App() {
           <Route path="/listings/:id" element={<Details />} />
           <Route path="/my-account" element={<Account />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
         </Routes>
       </BrowserRouter>
     </div>

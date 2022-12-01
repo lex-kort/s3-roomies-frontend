@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import "./Listings.css";
 
 // Services
-import ListingCRUD from '../services/ListingCRUD';
+import ListingCRUD from '../services/ListingService';
 
 // Components
 import FilterMenu from '../components/FilterMenu';
