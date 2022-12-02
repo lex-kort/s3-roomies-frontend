@@ -1,15 +1,35 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import './Navbar.css';
+import { useAuth } from './UserContext';
 
 function Navbar(){
-    const renderSignin = () =>{
-        if(localStorage.getItem('jwt_access_token')){
-            return <NavLink to="/logout">Logout</NavLink>;
-        }
+    const navigate = useNavigate();
+    const { setAuth, user } = useAuth();
+
+    // useEffect(() => {
+    //     setLinks();
+    // }, [isAuth])
+
+    const handleLogout = () => {
+        localStorage.removeItem('jwt_access_token')
+        setAuth(false);
+        navigate('/');
+    }
+
+    const setLinks = () => {
+        if(user){
+            return <>
+                    <NavLink to="/my-account">My Account</NavLink>
+                    <NavLink to="/" onClick={handleLogout}>Logout</NavLink>
+                </>
+        } 
         else{
-            return <NavLink to="/login">Login</NavLink>;
+            return <>
+                    <NavLink to="/register">Register</NavLink>
+                    <NavLink to="/login">Login</NavLink>
+                </>
         }
     }
 
@@ -17,10 +37,7 @@ function Navbar(){
         <nav className='navbar'>
             <NavLink to="/">Home</NavLink>
             <NavLink to="/listings">Listings</NavLink>
-            <NavLink to="/my-account">My Account</NavLink>
-            {window.addEventListener('storage', () => {
-                renderSignin();
-            })}
+            {setLinks()}
         </nav>
     )
 }

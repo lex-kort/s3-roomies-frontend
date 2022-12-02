@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from "react";
-import UserService from "../services/UserService";
+import React from "react";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "../components/UserContext";
 
 function Account(){
-    const [ user, setUser ] = useState(null);
-
-    useEffect(() => {
-        (async() => {
-            UserService.getUser().then((response) => {
-                setUser(response.data);
-            });
-        })();
-    }, []);
-
-    if(!user) return null;
-    return(
-        <>
-            <h2>Welcome {user.name}!</h2>
-        </>
+    const { user } = useAuth();
+    if(user === null) return(
+        <Navigate replace to="/login" />
     )
+    else{
+        return (
+            <>
+                <h2>Welcome {user.name}!</h2>
+            </>
+        )
+    }
 }
 
 export default Account;

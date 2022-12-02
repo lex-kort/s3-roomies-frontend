@@ -8,23 +8,35 @@ import Listings from './pages/Listings.js';
 import Account from './pages/Account.js';
 import Login from './pages/Login.js';
 import Details from './pages/Details.js';
-import Logout from './pages/Logout';
 
 // Component
 import Navbar from './components/Navbar.js';
+
+// Contexts
+import UserProvider from './components/UserContext'; 
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Navbar />
+        <UserProvider>
+          <Navbar />
+        </UserProvider>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/listings" element={<Listings />} />
           <Route path="/listings/:id" element={<Details />} />
-          <Route path="/my-account" element={<Account />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/logout" element={<Logout />} />
+          <Route path="/my-account" element={
+            <UserProvider>
+              <Account />
+            </UserProvider>
+           }/>
+          <Route path="/login" element={
+            <UserProvider>
+              <Login />
+            </UserProvider>
+          } />
+          <Route path="/register" element={<Login />} />
         </Routes>
       </BrowserRouter>
     </div>
