@@ -2,18 +2,15 @@ import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
 import './Navbar.css';
-import { useAuth } from './UserContext';
+import { useAuth } from '../contexts/UserContext';
+import AuthService from '../services/AuthService';
 
 function Navbar(){
     const navigate = useNavigate();
     const { setAuth, user } = useAuth();
 
-    // useEffect(() => {
-    //     setLinks();
-    // }, [isAuth])
-
     const handleLogout = () => {
-        localStorage.removeItem('jwt_access_token')
+        AuthService.logout();
         setAuth(false);
         navigate('/');
     }

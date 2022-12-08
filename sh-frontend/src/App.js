@@ -13,7 +13,7 @@ import Details from './pages/Details.js';
 import Navbar from './components/Navbar.js';
 
 // Contexts
-import UserProvider from './components/UserContext'; 
+import UserProvider from './contexts/UserContext'; 
 
 function App() {
   return (
@@ -36,7 +36,11 @@ function App() {
               <Login />
             </UserProvider>
           } />
-          <Route path="/register" element={<Login />} />
+          {/* <Route path="/register" element={
+            <UserProvider>
+              <Register />
+            </UserProvider>
+          } /> */}
         </Routes>
       </BrowserRouter>
     </div>

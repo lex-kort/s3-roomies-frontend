@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
 import './Login.css';
-import { useAuth } from "../components/UserContext";
 
 // Services
-import LoginService from "../services/LoginService";
+import AuthService from "../services/AuthService";
+
+// Context
+import { useAuth } from "../contexts/UserContext";
 
 function Login(){
     const navigate = useNavigate();
@@ -12,9 +14,9 @@ function Login(){
 
     const [signinInfo, setSigninInfo] = useState({
         email : "",
-        password: "",
-        failureMessage : ""
+        password: ""
     })
+    const [message, setMessage] = useState("");
 
     const handleInput = e => {
         setSigninInfo({
@@ -25,31 +27,18 @@ function Login(){
 
     const handleSubmit = async(e) => {
         e.preventDefault();
-        try {
-            const result = await LoginService.login(signinInfo.email, signinInfo.password);
-            console.log('');
-            if(result.status === 200){
-                localStorage.setItem('jwt_access_token', result.data);
-                setAuth(true);
-                setSigninInfo({
-                    email : "",
-                    password: "",
-                    disabled : true,
-                    failureMessage : ""
-                })
-                navigate('/my-account');
-            }
-            else{
-                setSigninInfo({
-                    email : "",
-                    password: "",
-                    disabled : true,
-                    failureMessage : "POGGERS"
-                })
-            }
+        const response = await AuthService.login(signinInfo.email, signinInfo.password);
+        setMessage(response.message);
+        if(response.result){
+            setAuth(true);
+            navigate('/my-account');
         }
-        catch{
-
+        else{
+            setSigninInfo({
+                email : "",
+                password: "",
+                disabled : true
+            })
         }
     }
 
@@ -82,9 +71,11 @@ function Login(){
                 <label id="floatingPassword">Password</label>
             </div>
             <button disabled={!(signinInfo.email !== "" && signinInfo.password !== "")} className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleSubmit}>Sign in</button>
-            <div className="alert alert-danger mt-2" style={{display: signinInfo.failureMessage ? 'block' : 'none' }} role="alert">
-                    {signinInfo.failureMessage}
-            </div>
+            {message && (
+                <div className="alert alert-danger mt-2" role="alert">
+                    {message}
+                </div>
+            )}
         </form>
     )
 }

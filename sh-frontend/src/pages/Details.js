@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 // Services
-import ListingCRUD from '../services/ListingService';
+import ListingService from '../services/ListingService';
 
 // Styling
 import "./Details.css";
@@ -15,7 +15,7 @@ function Details(){
 
     useEffect(() => {
         (async () => {
-            const result = await ListingCRUD.getListing(listingID);
+            const result = await ListingService.getListing(listingID);
             setListing(result.data);
         })();
     }, []);

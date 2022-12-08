@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import "./Listings.css";
 
 // Services
-import ListingCRUD from '../services/ListingService';
+import ListingService from '../services/ListingService';
 
 // Components
 import FilterMenu from '../components/FilterMenu';
@@ -14,7 +14,7 @@ function Listings(){
 
     const applyFilter = () => {
         (async () => {
-            const result = await ListingCRUD.getFilteredListings(
+            const result = await ListingService.getFilteredListings(
                 {
                     minArea : 16,
                     pets : false,
@@ -26,7 +26,7 @@ function Listings(){
 
     useEffect(() => {
         (async () => {
-            const result = await ListingCRUD.getActiveListings();
+            const result = await ListingService.getActiveListings();
             setListings(result.data);
         })();
     }, []);

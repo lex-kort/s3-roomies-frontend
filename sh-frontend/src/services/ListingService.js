@@ -16,10 +16,10 @@ const getListing = id => {
     return connection.get(compURL + "/" + id)
 }
 
-const ListingCRUD = {
+const ListingService = {
     getActiveListings,
     getFilteredListings,
     getListing
 };
 
-export default ListingCRUD;
+export default ListingService;

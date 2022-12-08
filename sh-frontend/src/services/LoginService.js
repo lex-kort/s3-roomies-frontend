@@ -3,8 +3,13 @@ import connection from "./utils/BaseURL";
 const url = "/login";
 
 const login = (email, password) => {
-    const data = connection.post(url, { email : email, password : password });
-    return data;
+    return connection.post(url, { email : email, password : password })
+        .then((response) => {
+            if(response.data){
+                localStorage.setItem('jwt_access_token', response.data);
+            }
+            return response;
+        });
 }
 
 const ListingService = {
