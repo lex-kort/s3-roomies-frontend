@@ -10,7 +10,7 @@ import { useAuth } from "../contexts/UserContext";
 
 function Login(){
     const navigate = useNavigate();
-    const { user, setAuth } = useAuth();
+    const { auth, setAuth } = useAuth();
 
     const [signinInfo, setSigninInfo] = useState({
         email : "",
@@ -31,7 +31,7 @@ function Login(){
         setMessage(response.message);
         if(response.result){
             setAuth(true);
-            navigate('/my-account');
+            navigate('/my-account', { replace : true });
         }
         else{
             setSigninInfo({
@@ -42,7 +42,7 @@ function Login(){
         }
     }
 
-    if(user){
+    if(auth){
         return(
             <Navigate replace to="/my-account" />
         )

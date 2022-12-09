@@ -2,36 +2,34 @@ import React, { useState, useEffect, createContext, useContext } from "react";
 
 // Services
 import UserService from "../services/UserService";
+import AuthService from "../services/AuthService";
 
 const UserContext = createContext({
     auth: null,
     setAuth: () => {},
     user: null,
+    setUser: () => {}
 });
 
 export const useAuth = () => useContext(UserContext);
 
 const UserProvider = ({children}) => {
-    const [auth, setAuth] = useState(null);
     const [user, setUser] = useState(null);
+    const [auth, setAuth] = useState(() => {
+        return AuthService.getToken() ? true : false;
+    });
 
     useEffect(() => {
-        console.log("Auth state changed to: " + auth);
-        console.log("JWT token state: " + UserService.getToken());
-        const isAuth = async() =>{
-            try{
-                const res = await UserService.getUser();
-                setUser(res);
-            }
-            catch(error){
-                setUser(null);
-            }
+        if(AuthService.getToken()){
+            (async() => {
+                const response = await UserService.getUser();
+                setUser(response);
+            })();
         }
-        isAuth();
-    }, [auth])
+    },[]);
 
     return (
-        <UserContext.Provider value={{auth, setAuth, user}}>
+        <UserContext.Provider value={{user, setUser, auth, setAuth }}>
             {children}
         </UserContext.Provider>
       );

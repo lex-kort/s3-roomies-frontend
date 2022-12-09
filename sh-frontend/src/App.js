@@ -13,33 +13,28 @@ import Details from './pages/Details.js';
 import Navbar from './components/Navbar.js';
 
 // Contexts
-import UserProvider from './contexts/UserContext'; 
+import ProtectedRoute from './components/ProtectedRoute';
+import Roles from './services/utils/Roles';
+import Dummy from './pages/Dummy';
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <UserProvider>
-          <Navbar />
-        </UserProvider>
+        <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/listings" element={<Listings />} />
           <Route path="/listings/:id" element={<Details />} />
-          <Route path="/my-account" element={
-            <UserProvider>
-              <Account />
-            </UserProvider>
-           }/>
-          <Route path="/login" element={
-            <UserProvider>
-              <Login />
-            </UserProvider>
-          } />
+          <Route element={<ProtectedRoute role={[Roles.Landlord]}/>}>
+            <Route path="/listings/new" element={<Dummy />}/>
+          </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/my-account" element={<Account />} />
+          </Route>
+          <Route path="/login" element={<Login />} />
           {/* <Route path="/register" element={
-            <UserProvider>
               <Register />
-            </UserProvider>
           } /> */}
         </Routes>
       </BrowserRouter>

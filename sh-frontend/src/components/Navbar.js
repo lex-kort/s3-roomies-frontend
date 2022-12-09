@@ -7,26 +7,31 @@ import AuthService from '../services/AuthService';
 
 function Navbar(){
     const navigate = useNavigate();
-    const { setAuth, user } = useAuth();
+    const { setUser, auth, setAuth } = useAuth();
 
     const handleLogout = () => {
         AuthService.logout();
+        setUser(null);
         setAuth(false);
         navigate('/');
     }
 
     const setLinks = () => {
-        if(user){
-            return <>
+        if(auth){
+            return (
+                <>
                     <NavLink to="/my-account">My Account</NavLink>
                     <NavLink to="/" onClick={handleLogout}>Logout</NavLink>
                 </>
+            )
         } 
         else{
-            return <>
+            return(
+                <>
                     <NavLink to="/register">Register</NavLink>
                     <NavLink to="/login">Login</NavLink>
                 </>
+            )
         }
     }
 

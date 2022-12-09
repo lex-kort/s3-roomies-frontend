@@ -15,8 +15,23 @@ const getUser = async() => {
     return promise.data;
 }
 
+const getTokenizedUser = () => {
+    const user = {
+        token: "",
+        id: 0,
+        role: "",
+    }
+    if(AuthService.getToken()){
+        user.token = AuthService.getToken();
+        user.role = "LANDLORD";
+        user.id = 1;
+    }
+    return user;
+}
+
 const UserService = {
-    getUser
+    getUser,
+    getTokenizedUser
 }
 
 export default UserService;
