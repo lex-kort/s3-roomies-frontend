@@ -1,0 +1,10 @@
+.form-signin{
+    width: 100%;
+    max-width: 350px;
+    margin: 0 auto;
+    margin-top: 20px;
+}
+
+.form-floating{
+    margin: 15px 0;
+}
