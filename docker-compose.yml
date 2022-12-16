@@ -1,0 +1,36 @@
+services:
+  s3-individual:
+    image: mariadb:latest
+    ports:
+      - 3306:3306
+    environment:
+        MYSQL_DATABASE: student-housing
+        MYSQL_ROOT_PASSWORD: abcde
+
+  roomies-backend:
+    build:
+      context: ./backend-submodule/sh-backend
+      dockerfile: Dockerfile
+
+    image: roomies/sh-backend
+    restart: always
+    ports: 
+      - 8080:8080
+    environment:
+      MYSQL_HOST: s3-individual
+      MYSQL_USER: root
+      MYSQL_PASSWORD: abcde
+      MYSQL_PORT: 3306
+    depends_on:
+      - s3-individual
+
+  roomies-frontend:
+    build: 
+      context: ./sh-frontend
+      dockerfile: Dockerfile
+
+    image: roomies/sh-frontend
+    ports: 
+      - 3000:3000
+    depends_on:
+      - roomies-backend

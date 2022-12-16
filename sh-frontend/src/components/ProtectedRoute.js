@@ -6,8 +6,7 @@ import { useAuth } from "../contexts/UserContext";
 
 function ProtectedRoute({roles, redirectTo}){
     const { user, auth } = useAuth();
-    if(auth){
-        // return <Outlet/> 
+    if(auth){ 
         return !roles || roles.some((role) => user.role === role) ? <Outlet/> : <Navigate replace to="/" />
     }
     return (
