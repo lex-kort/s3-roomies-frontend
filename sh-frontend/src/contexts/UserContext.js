@@ -28,6 +28,15 @@ const UserProvider = ({children}) => {
         }
     },[]);
 
+    useEffect(() => {
+        if(auth && AuthService.getToken()){
+            (async() => {
+                const response = await UserService.getUser();
+                setUser(response);
+            })();
+        }
+    },[auth]);
+
     return (
         <UserContext.Provider value={{user, setUser, auth, setAuth }}>
             {children}
