@@ -10,7 +10,7 @@ function ProtectedRoute({roles, redirectTo}){
         return !roles || roles.some((role) => user.role === role) ? <Outlet/> : <Navigate replace to="/" />
     }
     return (
-        <Navigate replace to={redirectTo} />
+        <Navigate replace to={redirectTo ?? "/"} />
     )
 }
 

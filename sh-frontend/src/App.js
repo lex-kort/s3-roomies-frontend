@@ -8,14 +8,15 @@ import Listings from './pages/Listings.js';
 import Account from './pages/Account.js';
 import Login from './pages/Login.js';
 import Details from './pages/Details.js';
+import Chat from './pages/Chat';
+import Dummy from './pages/Dummy';
 
 // Component
 import Navbar from './components/Navbar.js';
-
-// Contexts
 import ProtectedRoute from './components/ProtectedRoute';
+
+// Utils
 import Roles from './services/utils/Roles';
-import Dummy from './pages/Dummy';
 
 function App() {
   return (
@@ -29,8 +30,9 @@ function App() {
           <Route element={<ProtectedRoute role={[Roles.Landlord]}/>}>
             <Route path="/listings/new" element={<Dummy />}/>
           </Route>
-          <Route element={<ProtectedRoute />}>
+          <Route element={<ProtectedRoute redirectTo={"/login"} />}>
             <Route path="/my-account" element={<Account />} />
+            <Route path="/my-account/chat" element={<Chat />} />
           </Route>
           <Route path="/login" element={<Login />} />
           {/* <Route path="/register" element={
