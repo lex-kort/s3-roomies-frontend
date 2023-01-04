@@ -7,7 +7,7 @@ stages:
 - delivery
 
 test:
-  image: node:latest
+  image: cypress/browsers:node16.17.1-chrome105-ff104-edge
   stage: test
   script:
     - cd backend-submodule/sh-backend
@@ -18,7 +18,7 @@ test:
     - cd sh-frontend
     - npm ci
     - npm run start &
-    - npx cypress run
+    - npx cypress run --browser firefox
   
 delivery:
     stage: delivery
