@@ -32,9 +32,7 @@ test:
     - cd sh-frontend
     - npm ci
     - npm install -g serve
-    - npm install -g wait-on
     - serve -s build &
-    - wait-on http://localhost:3000
     - npm run e2e
   
 delivery:
