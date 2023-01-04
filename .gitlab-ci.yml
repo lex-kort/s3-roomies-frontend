@@ -12,7 +12,7 @@ build:
   script: 
     - cd sh-frontend
     - npm install
-    - npm run build
+    - npm start
 
 test:
   image: node:latest
