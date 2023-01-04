@@ -18,7 +18,7 @@ test:
     - cd sh-frontend
     - npm ci
     - npm run start:ci &
-    - npm run e2e
+    - npm run runHeadless
   
 delivery:
     stage: delivery
