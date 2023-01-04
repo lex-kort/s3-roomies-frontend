@@ -1,5 +1,6 @@
 variables:
     GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_DEPTH: 1
 
 stages:
 - build
@@ -10,7 +11,7 @@ build:
     image: node:latest
     stage: build
     script:
-        - npm ci
+        - npm install
         - npm run build
     artifacts:
         paths:
