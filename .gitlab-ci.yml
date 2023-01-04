@@ -7,8 +7,7 @@ test:
   image: node:latest
   stage: test
   script:
-    - cd backend-submodule
-    - ls
+    - cd backend-submodule/sh-backend
     - ./gradlew build -x test
     - cd ..
     - docker-compose build
