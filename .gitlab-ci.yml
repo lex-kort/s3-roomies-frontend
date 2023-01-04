@@ -18,7 +18,7 @@ test:
     - cd sh-frontend
     - npm ci
     - npm run start:ci &
-    - npm run runHeadless
+    - npm cypress run
   
 delivery:
     stage: delivery
