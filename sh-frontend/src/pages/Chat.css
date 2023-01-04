@@ -1,7 +1,6 @@
 .chat-history{
     display: flex;
     flex-direction: column;
-    height: 880px;
     max-height: 800px;
     overflow-y: scroll
 }

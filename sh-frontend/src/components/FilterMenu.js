@@ -8,7 +8,7 @@ function FilterMenu( {applyFilter} ){
                 <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault"/>
                 <label className="form-check-label" htmlFor="flexCheckDefault">Default Checkbox</label>
             </div>
-            <button type="button" onClick={applyFilter}>Apply filter</button>
+            <button type="button" cy-name="filter" onClick={applyFilter}>Apply filter</button>
         </form>
     )
 }

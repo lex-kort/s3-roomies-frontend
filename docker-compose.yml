@@ -10,8 +10,10 @@ services:
   roomies-backend:
     build:
       context: ./backend-submodule/sh-backend
+      args:
+        JAR_FILE: build/libs/*.jar
       dockerfile: Dockerfile
-
+      
     image: roomies/sh-backend
     restart: always
     ports: 
