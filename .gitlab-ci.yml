@@ -1,0 +1,37 @@
+variables: 
+  GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+stages:
+- build
+- test
+- sonarqube
+- delivery
+
+build:
+  stage : build
+  script: 
+    - cd sh-frontend
+    - npm install
+    - npm run build
+
+test:
+  image: node:latest
+  stage: test
+  script:
+    - cd backend-submodule/sh-backend
+    - ./gradlew build -x test
+    - cd ..
+    - docker-compose build
+    - cd ..
+    - cd sh-frontend
+    - npm install
+    - npm run
+    - npm run runHeadless
+  
+delivery:
+    stage: delivery
+    script:
+        - cd backend-submodule/sh-backend
+        - ./gradlew build -x test
+        - cd ../../
+        - docker-compose build
