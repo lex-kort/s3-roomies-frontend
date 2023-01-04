@@ -8,7 +8,7 @@ build:
   script: 
     - cd sh-frontend
     - npm install
-    - npm start
+    - npm run build
 
 test:
   image: node:latest
