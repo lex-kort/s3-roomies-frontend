@@ -17,7 +17,7 @@ test:
     - cd ..
     - cd sh-frontend
     - npm install
-    - npm run
+    - npm start
     - npm run runHeadless
   
 delivery:
