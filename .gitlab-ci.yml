@@ -6,20 +6,34 @@ stages:
 - test
 - delivery
 
+build:
+    image: node:latest
+    stage: build
+    script:
+        - npm ci
+        - npm run build
+    artifacts:
+        paths:
+            - build
+
 test:
-  image: node:latest
+  image: cypress/base:16.17.0
   stage: test
   script:
     - cd backend-submodule/sh-backend
     - ./gradlew build -x test
     - cd ..
+    - docker-compose down
     - docker-compose build
-    - docker-compose up
+    - docker-compose up &
     - cd ..
     - cd sh-frontend
     - npm ci
-    - npm run start &
-    - npm run runHeadless
+    - npm install -g serve
+    - npm install -g wait-on
+    - serve -s build &
+    - wait-on http://localhost:3000
+    - npm run e2e
   
 delivery:
     stage: delivery
