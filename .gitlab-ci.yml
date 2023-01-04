@@ -16,9 +16,9 @@ test:
     - docker-compose build
     - cd ..
     - cd sh-frontend
-    - npm install
-    - npm start
-    - npm run runHeadless
+    - npm ci
+    - npm run start:ci &
+    - npm run e2e
   
 delivery:
     stage: delivery
