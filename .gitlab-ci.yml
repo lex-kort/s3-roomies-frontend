@@ -11,7 +11,8 @@ build:
     image: node:latest
     stage: build
     script:
-        - npm install
+        - cd sh-frontend
+        - npm ci
         - npm run build
     artifacts:
         paths:
