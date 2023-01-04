@@ -18,6 +18,7 @@ function Details(){
             const result = await ListingService.getListing(listingID);
             setListing(result.data);
         })();
+        // eslint-disable-next-line
     }, []);
 
     if(listing != null){
