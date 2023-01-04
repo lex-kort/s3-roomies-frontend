@@ -3,18 +3,12 @@ stages:
 - test
 - delivery
 
-build:
-  stage : build
-  script: 
-    - cd sh-frontend
-    - npm install
-    - npm run build
-
 test:
   image: node:latest
   stage: test
   script:
     - cd backend-submodule
+    - ls
     - ./gradlew build -x test
     - cd ..
     - docker-compose build
