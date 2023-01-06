@@ -5,7 +5,7 @@ describe('The Login Page', () => {
 
         cy.login(email, password)
         
-        cy.url().should('include', '/my-account', async() => {
+        cy.url().should('include', '/my-account', () => {
             expect(localStorage.getItem("jwt_access_token")).to.exist()
         })
     })

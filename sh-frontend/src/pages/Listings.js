@@ -12,14 +12,18 @@ import FilterMenu from '../components/FilterMenu';
 function Listings(){
     const [listings, setListings] = useState([]);
 
-    const applyFilter = () => {
+    const applyFilter = (minArea, maxRent, petsAllowed, neighborhood) => {
         (async () => {
+            console.log("minArea: " + minArea) 
             const result = await ListingService.getFilteredListings(
                 {
-                    minArea : 16,
-                    pets : false,
+                    "minArea" : minArea,
+                    "maxRent" : maxRent,
+                    "pets" : petsAllowed,
+                    "neighborhood" : neighborhood
                 }
             );
+            console.log(result);
             setListings(result.data);
         })();
     }
@@ -49,16 +53,32 @@ function Listings(){
         )
     }
 
+    function Listings(){
+        if(!listings){
+            return (
+                <>
+                    <h2>No listings were found with the filter</h2>
+                </>
+            )
+        }
+
+        return (
+            <>
+                <h2>All available listings</h2>
+                <div className='row mx-2'>
+                    {listings.map(listing => (
+                        createCard(listing)
+                    ))}
+                </div>
+            </>
+        )
+    }
+
     return(
         <div className='layout'>
             <FilterMenu applyFilter={applyFilter} />
             <div className='listing-container'>
-                <h2>All available listings</h2>
-                    <div className='row mx-2'>
-                        {listings.map(listing => (
-                            createCard(listing)
-                        ))}
-                    </div>
+                <Listings />
             </div>
         </div>
     )
