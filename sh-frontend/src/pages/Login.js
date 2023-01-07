@@ -8,15 +8,19 @@ import AuthService from "../services/AuthService";
 // Context
 import { useAuth } from "../contexts/UserContext";
 
+// Components
+import AlertMessage from "../components/AlertMessage";
+
 function Login(){
     const navigate = useNavigate();
     const { auth, setAuth } = useAuth();
+    const [message, setMessage] = useState("");
+    const [alertType, setAlertType] = useState();
 
     const [signinInfo, setSigninInfo] = useState({
         email : "",
         password: ""
     })
-    const [message, setMessage] = useState("");
 
     const handleInput = e => {
         setSigninInfo({
@@ -29,6 +33,7 @@ function Login(){
         e.preventDefault();
         const response = await AuthService.login(signinInfo.email, signinInfo.password);
         setMessage(response.message);
+        setAlertType(response.type);
         if(response.result){
             setAuth(true);
             navigate('/my-account', { replace : true });
@@ -48,35 +53,33 @@ function Login(){
         )
     }
     return(
-        <form className="form-signin">
-            <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
-            <div className="form-floating">
-                <input id="floatingInput" 
-                        className="form-control" 
-                        type="email" 
-                        placeholder="name@example.com"
-                        name="email"
-                        onChange={handleInput}
-                        value={signinInfo.email} />
-                <label id="floatingInput">Email Address</label>
-            </div>
-            <div className="form-floating">
-                <input id="floatingPassword" 
-                        className="form-control" 
-                        type="password" 
-                        placeholder="password" 
-                        name="password"
-                        onChange={handleInput}
-                        value={signinInfo.password} />
-                <label id="floatingPassword">Password</label>
-            </div>
-            <button disabled={!(signinInfo.email !== "" && signinInfo.password !== "")} className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleSubmit}>Sign in</button>
-            {message && (
-                <div className="alert alert-danger mt-2" role="alert">
-                    {message}
+        <div className="container">
+            <form className="form-signin">
+                <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
+                <div className="form-floating">
+                    <input id="floatingInput" 
+                            className="form-control" 
+                            type="email" 
+                            placeholder="name@example.com"
+                            name="email"
+                            onChange={handleInput}
+                            value={signinInfo.email} />
+                    <label id="floatingInput">Email Address</label>
                 </div>
-            )}
-        </form>
+                <div className="form-floating">
+                    <input id="floatingPassword" 
+                            className="form-control" 
+                            type="password" 
+                            placeholder="password" 
+                            name="password"
+                            onChange={handleInput}
+                            value={signinInfo.password} />
+                    <label id="floatingPassword">Password</label>
+                </div>
+                <button disabled={!(signinInfo.email !== "" && signinInfo.password !== "")} className="w-100 btn btn-lg btn-primary mb-3" type="submit" onClick={handleSubmit}>Sign in</button>
+                <AlertMessage message={message} type={alertType} />
+            </form>
+        </div>
     )
 }
 

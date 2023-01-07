@@ -20,25 +20,25 @@ function Navbar(){
         if(auth){
             return (
                 <>
-                    <NavLink to="/my-account">My Account</NavLink>
-                    <NavLink to="/" onClick={handleLogout}>Logout</NavLink>
+                    <NavLink className="link nav-link" to="/my-account">My Account</NavLink>
+                    <NavLink className="link nav-link" to="/" onClick={handleLogout}>Logout</NavLink>
                 </>
             )
         } 
         else{
             return(
                 <>
-                    <NavLink to="/register">Register</NavLink>
-                    <NavLink to="/login">Login</NavLink>
+                    <NavLink className="link nav-link" to="/register">Register</NavLink>
+                    <NavLink className="link nav-link" to="/login">Login</NavLink>
                 </>
             )
         }
     }
 
     return (
-        <nav className='navbar'>
-            <NavLink to="/">Home</NavLink>
-            <NavLink to="/listings">Listings</NavLink>
+        <nav className='navbar bg-light'>
+            <NavLink className="link nav-link" to="/">Home</NavLink>
+            <NavLink className="link nav-link" to="/listings">Listings</NavLink>
             {setLinks()}
         </nav>
     )

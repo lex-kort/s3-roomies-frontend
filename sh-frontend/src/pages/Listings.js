@@ -14,16 +14,14 @@ function Listings(){
 
     const applyFilter = (minArea, maxRent, petsAllowed, neighborhood) => {
         (async () => {
-            console.log("minArea: " + minArea) 
             const result = await ListingService.getFilteredListings(
                 {
-                    "minArea" : minArea,
-                    "maxRent" : maxRent,
-                    "pets" : petsAllowed,
-                    "neighborhood" : neighborhood
+                    "minArea" : Number(minArea) === 0 ? null : minArea,
+                    "maxRent" : Number(maxRent) === 0 ? null : maxRent,
+                    "pets" : (petsAllowed.toLowerCase() === "true" || petsAllowed.toLowerCase() === "false") ? petsAllowed : null,
+                    "neighborhood" : (neighborhood ? neighborhood : null)
                 }
             );
-            console.log(result);
             setListings(result.data);
         })();
     }
@@ -39,7 +37,7 @@ function Listings(){
         return (
             <div key={listing.id} className='col-xl-3 col-lg-4 col-md-6 my-2'>
                 <div className='card'>
-                    <Link className='card-link' to={"/listings/" + listing.id}>
+                    <Link className='link' to={"/listings/" + listing.id}>
                         <div className='card-body'>
                             <h5 className='card-title'>{listing.address}</h5>
                             <p className='card-text'>{listing.city}, {listing.neighborhood}</p>
@@ -57,14 +55,14 @@ function Listings(){
         if(!listings){
             return (
                 <>
-                    <h2>No listings were found with the filter</h2>
+                    <h2 className='text-center'>No listings were found with the filter</h2>
                 </>
             )
         }
 
         return (
             <>
-                <h2>All available listings</h2>
+                <h2 className='text-center'>All available listings</h2>
                 <div className='row mx-2'>
                     {listings.map(listing => (
                         createCard(listing)
@@ -77,7 +75,7 @@ function Listings(){
     return(
         <div className='layout'>
             <FilterMenu applyFilter={applyFilter} />
-            <div className='listing-container'>
+            <div className='container listing-container'>
                 <Listings />
             </div>
         </div>

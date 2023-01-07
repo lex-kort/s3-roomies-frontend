@@ -23,9 +23,17 @@ function Details(){
 
     if(listing != null){
         return(
-            <div>
-                <h1>{listing.address}</h1>
-                <p>&euro;{listing.rent.toFixed(2)},-</p>
+            <div className='container'>
+                <div className='row'>
+                    <div className='col'>
+                        <h1>{listing.address}</h1>
+                        <p>&euro;{listing.rent.toFixed(2)},-</p>
+                    </div>
+                    <div className='col'>
+                        <h1>{listing.address}</h1>
+                        <p>&euro;{listing.rent.toFixed(2)},-</p>
+                    </div>
+                </div>
             </div>
         )
     }

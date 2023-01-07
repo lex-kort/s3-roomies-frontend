@@ -7,6 +7,7 @@ import Home from './pages/Home.js';
 import Listings from './pages/Listings.js';
 import Account from './pages/Account.js';
 import Login from './pages/Login.js';
+import Register from './pages/Register';
 import Details from './pages/Details.js';
 import Chat from './pages/Chat';
 import Dummy from './pages/Dummy';
@@ -35,9 +36,9 @@ function App() {
             <Route path="/my-account/chat" element={<Chat />} />
           </Route>
           <Route path="/login" element={<Login />} />
-          {/* <Route path="/register" element={
+          <Route path="/register" element={
               <Register />
-          } /> */}
+          } />
         </Routes>
       </BrowserRouter>
     </div>
