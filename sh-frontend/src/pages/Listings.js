@@ -9,6 +9,9 @@ import ListingService from '../services/ListingService';
 // Components
 import FilterMenu from '../components/FilterMenu';
 
+// Images
+import placeholder from '../img/placeholder.jpg';
+
 function Listings(){
     const [listings, setListings] = useState([]);
 
@@ -38,14 +41,24 @@ function Listings(){
             <div key={listing.id} className='col-xl-3 col-lg-4 col-md-6 my-2'>
                 <div className='card'>
                     <Link className='link' to={"/listings/" + listing.id}>
-                        <div className='card-body'>
-                            <h5 className='card-title'>{listing.address}</h5>
-                            <p className='card-text'>{listing.city}, {listing.neighborhood}</p>
-                            <p className=''>Rent: &euro;{listing.rent.toFixed(2)},-</p>
-                            <p className=''>Surface area: {listing.surfaceArea}m&sup2;</p>
-                            <p className=''>Pets allowed: {listing.petsAllowed ? "yes" : "no"}</p>
+                        <img src={placeholder} class="card-img-top" alt="placeholder" />
+                        <div className='card-body text-center'>
+                            <h2 className='card-title'>{listing.address}</h2>
+                            <h5 className='card-subtitle'>{listing.city}, {listing.neighborhood}</h5>
                         </div>
-                    </Link  >
+                        <div className='card-body row'>
+                            <div className='col-6'>
+                                <div className='card-text'>Rent:</div>
+                                <div className='card-text'>Surface area:</div>
+                                <div className='card-text'>Pets allowed:</div>
+                            </div>
+                            <div className='col-6'>
+                                <div className='card-text'>&euro;{listing.rent.toFixed(2)},-</div>
+                                <div className='card-text'>{listing.surfaceArea} m&sup2;</div>
+                                <div className='card-text'>{listing.petsAllowed ? "Yes" : "No"}</div>
+                            </div>
+                        </div>
+                    </Link>
                 </div>
             </div>
         )

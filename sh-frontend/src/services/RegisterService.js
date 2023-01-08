@@ -17,11 +17,21 @@ const register = async(data) => {
             }
         }
         else{
-            console.log(response);
+            result = { 
+                result : false,
+                message : "This email is already taken.",
+                type : AlertTypes.Error
+            };
         }
     }
     catch(error){
-
+        const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        console.log(resMessage);
+        result = { 
+            result : false,
+            message : "Failed to register account, please try again.",
+            type : AlertTypes.Error
+        };
     }
     return result;
 }

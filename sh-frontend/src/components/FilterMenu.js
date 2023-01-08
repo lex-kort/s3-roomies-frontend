@@ -60,12 +60,12 @@ function FilterMenu( {applyFilter} ){
             <h4 className="text-center fw-semibold">Filtering options</h4>
             <form className="form-filters d-flex flex-column flex-grow-1 " onSubmit={e => { e.preventDefault(); }}>
                 <div className="form-group mb-3">
-                    <label className="form-label" htmlFor="rangeSurfaceArea">Minimal surface area (in m&sup3;):</label>
+                    <label className="form-label" htmlFor="rangeSurfaceArea">Minimal surface area (in m&sup2;):</label>
                     <input className="form-control" value={surfaceArea} type="text" id="inputSurfaceArea" onChange={changeSurfaceArea} />
                     <input className="form-range" type="range" min="0" max={minSurfaceAreaRange} step="1" value={surfaceArea} id="rangeSurfaceArea" onChange={changeSurfaceArea} />
                 </div>
                 <div className="form-group mb-3">
-                    <label className="form-label" htmlFor="rangeRent">Maximum rent (in euro):</label>
+                    <label className="form-label" htmlFor="rangeRent">Maximum rent (in Euros):</label>
                     <input className="form-control" value={maxRent} type="text" id="inputRent" onChange={changeMaxRent} />
                     <input className="form-range" type="range" min="0" max={maxRentRange} step="10" value={maxRent} id="rangeRent" onChange={changeMaxRent} />
                 </div>

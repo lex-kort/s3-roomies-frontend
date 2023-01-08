@@ -17,6 +17,7 @@ function Register() {
     const { auth } = useAuth();
     const [message, setMessage] = useState("");
     const [alertType, setAlertType] = useState();
+    const [isValidated, setIsValidated] = useState(false);
     
     const [registerInfo, setRegisterInfo] = useState({
         name : "",
@@ -37,6 +38,7 @@ function Register() {
 
     const handleSubmit = async(e) => {
         e.preventDefault();
+        setIsValidated(true);
         const response = await RegisterService.register(registerInfo);
         setMessage(response.message);
         setAlertType(response.type);
@@ -62,29 +64,38 @@ function Register() {
     }
     return (
         <div className="container">
-            <form className="form-register">
+            <form className={"form-register needs-validation " + (isValidated ? "was-validated" : "")}>
                 <h1 className="h3 mb-3 fw-normal">Sign up for a student account</h1>
                 <div className="row">
                     <div className="form-group col-5 mb-3">
                         <label className="form-label">First name:</label>
-                        <input className="form-control" type="text" 
+                        <input className="form-control"     type="text" 
                             name="name"
                             onChange={handleInput}
-                            value={registerInfo.name} />
+                            value={registerInfo.name} 
+                            pattern="^[a-zA-Z ]+"  required/>
+                        <div className="invalid-feedback">
+                            Enter first name
+                        </div>
                     </div>
                     <div className="form-group col-2 mb-3">
                         <label className="form-label">Prefix:</label>
                         <input className="form-control" type="text" 
                             name="prefix"
                             onChange={handleInput}
-                            value={registerInfo.prefix}/>
+                            value={registerInfo.prefix}
+                            pattern="^[a-zA-Z ]+"/>
                     </div>
                     <div className="form-group col-5 mb-3">
                         <label className="form-label">Last name:</label>
                         <input className="form-control" type="text" 
                             name="surname"
                             onChange={handleInput}
-                            value={registerInfo.surname} />
+                            value={registerInfo.surname} 
+                            pattern="^[a-zA-Z ]+" />
+                        <div className="invalid-feedback">
+                            Enter last name
+                        </div>
                     </div>
                 </div>
                 <div className="form-group mb-3">
@@ -93,6 +104,9 @@ function Register() {
                             name="studentNumber"
                             onChange={handleInput}
                             value={registerInfo.studentNumber} />
+                    <div className="invalid-feedback">
+                        Enter student number
+                    </div>
                 </div>
                 <div className="form-group mb-3">
                     <label className="form-label">Phone number:</label>
@@ -100,6 +114,9 @@ function Register() {
                             name="phoneNumber"
                             onChange={handleInput}
                             value={registerInfo.phoneNumber} />
+                    <div className="invalid-feedback">
+                        Enter email
+                    </div>
                 </div>
                 <div className="form-group mb-3">
                     <label className="form-label">Email address:</label>
@@ -107,6 +124,9 @@ function Register() {
                             name="email"
                             onChange={handleInput}
                             value={registerInfo.email} />
+                    <div className="invalid-feedback">
+                        Enter password
+                    </div>
                 </div>
                 <div className="form-group mb-3">
                     <label className="form-label">Password:</label>
@@ -114,8 +134,11 @@ function Register() {
                             name="password"
                             onChange={handleInput}
                             value={registerInfo.password} />
+                    <div className="invalid-feedback">
+                        Enter password
+                    </div>
                 </div>
-                <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleSubmit}>Register account</button>
+                <button className="w-100 btn btn-lg btn-primary  mb-3" type="submit" onClick={handleSubmit}>Register account</button>
                 <AlertMessage message={message} type={alertType} />
             </form>
         </div>
