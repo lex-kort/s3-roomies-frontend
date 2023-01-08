@@ -3,7 +3,7 @@ import connection from "./utils/BaseURL";
 // Enums
 import AlertTypes from "./utils/AlertTypes";
 
-const componentURL = "/accounts";
+const componentURL = "/accounts/register";
 
 const register = async(data) => {
     let result = {};
@@ -17,7 +17,7 @@ const register = async(data) => {
             }
         }
         else{
-
+            console.log(response);
         }
     }
     catch(error){

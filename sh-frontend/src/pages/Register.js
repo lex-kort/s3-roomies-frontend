@@ -70,21 +70,21 @@ function Register() {
                         <input className="form-control" type="text" 
                             name="name"
                             onChange={handleInput}
-                            value={registerInfo.name}></input>
+                            value={registerInfo.name} />
                     </div>
                     <div className="form-group col-2 mb-3">
                         <label className="form-label">Prefix:</label>
                         <input className="form-control" type="text" 
                             name="prefix"
                             onChange={handleInput}
-                            value={registerInfo.prefix}></input>
+                            value={registerInfo.prefix}/>
                     </div>
                     <div className="form-group col-5 mb-3">
                         <label className="form-label">Last name:</label>
                         <input className="form-control" type="text" 
                             name="surname"
                             onChange={handleInput}
-                            value={registerInfo.surname}></input>
+                            value={registerInfo.surname} />
                     </div>
                 </div>
                 <div className="form-group mb-3">
