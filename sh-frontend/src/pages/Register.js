@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import './Login.css';
+import './Register.css';
 
 // Services
 import RegisterService from "../services/RegisterService";
@@ -24,7 +24,8 @@ function Register() {
         surname : "",
         email : "",
         password : "",
-        phoneNumber : ""
+        phoneNumber : "",
+        studentNumber : ""
     })
 
     const handleInput = e => {
@@ -63,27 +64,58 @@ function Register() {
         <div className="container">
             <form className="form-register">
                 <h1 className="h3 mb-3 fw-normal">Sign up for a student account</h1>
-                <div className="form-floating">
-                    <input id="floatingInput" 
-                            className="form-control" 
-                            type="email" 
-                            placeholder="name@example.com"
+                <div className="row">
+                    <div className="form-group col-5 mb-3">
+                        <label className="form-label">First name:</label>
+                        <input className="form-control" type="text" 
+                            name="name"
+                            onChange={handleInput}
+                            value={registerInfo.name}></input>
+                    </div>
+                    <div className="form-group col-2 mb-3">
+                        <label className="form-label">Prefix:</label>
+                        <input className="form-control" type="text" 
+                            name="prefix"
+                            onChange={handleInput}
+                            value={registerInfo.prefix}></input>
+                    </div>
+                    <div className="form-group col-5 mb-3">
+                        <label className="form-label">Last name:</label>
+                        <input className="form-control" type="text" 
+                            name="surname"
+                            onChange={handleInput}
+                            value={registerInfo.surname}></input>
+                    </div>
+                </div>
+                <div className="form-group mb-3">
+                    <label className="form-label">Student number:</label>
+                    <input className="form-control" type="text"
+                            name="studentNumber"
+                            onChange={handleInput}
+                            value={registerInfo.studentNumber} />
+                </div>
+                <div className="form-group mb-3">
+                    <label className="form-label">Phone number:</label>
+                    <input className="form-control" type="text"
+                            name="phoneNumber"
+                            onChange={handleInput}
+                            value={registerInfo.phoneNumber} />
+                </div>
+                <div className="form-group mb-3">
+                    <label className="form-label">Email address:</label>
+                    <input className="form-control" type="email" 
                             name="email"
                             onChange={handleInput}
                             value={registerInfo.email} />
-                    <label id="floatingInput">Email Address</label>
                 </div>
-                <div className="form-floating">
-                    <input id="floatingPassword" 
-                            className="form-control" 
-                            type="password" 
-                            placeholder="password" 
+                <div className="form-group mb-3">
+                    <label className="form-label">Password:</label>
+                    <input className="form-control" type="password" 
                             name="password"
                             onChange={handleInput}
                             value={registerInfo.password} />
-                    <label id="floatingPassword">Password</label>
                 </div>
-                <button disabled={!(registerInfo.email !== "" && registerInfo.password !== "")} className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleSubmit}>Sign in</button>
+                <button className="w-100 btn btn-lg btn-primary" type="submit" onClick={handleSubmit}>Register account</button>
                 <AlertMessage message={message} type={alertType} />
             </form>
         </div>

@@ -57,24 +57,22 @@ function Login(){
             <form className="form-signin">
                 <h1 className="h3 mb-3 fw-normal">Please sign in</h1>
                 <div className="form-floating">
-                    <input id="floatingInput" 
-                            className="form-control" 
+                    <input className="form-control" 
                             type="email" 
                             placeholder="name@example.com"
                             name="email"
                             onChange={handleInput}
                             value={signinInfo.email} />
-                    <label id="floatingInput">Email Address</label>
+                    <label>Email Address</label>
                 </div>
                 <div className="form-floating">
-                    <input id="floatingPassword" 
-                            className="form-control" 
+                    <input className="form-control" 
                             type="password" 
                             placeholder="password" 
                             name="password"
                             onChange={handleInput}
                             value={signinInfo.password} />
-                    <label id="floatingPassword">Password</label>
+                    <label>Password</label>
                 </div>
                 <button disabled={!(signinInfo.email !== "" && signinInfo.password !== "")} className="w-100 btn btn-lg btn-primary mb-3" type="submit" onClick={handleSubmit}>Sign in</button>
                 <AlertMessage message={message} type={alertType} />
