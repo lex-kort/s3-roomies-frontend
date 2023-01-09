@@ -4,7 +4,7 @@ describe('The Listings Page', () => {
         
         cy.visit('/listings')
 
-        cy.get('button[cy-name=filter]').click()
+        cy.get('button[cy-name=filter-apply]').click()
 
         cy.contains('Nicelane').click()
 

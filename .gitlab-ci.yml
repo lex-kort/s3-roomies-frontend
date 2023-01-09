@@ -25,7 +25,7 @@ test:
     - cd backend-submodule/sh-backend
     - ./gradlew build -x test
     - cd ../../
-    - docker-compose up -d &
+    - docker-compose up -d
     - cd sh-frontend
     - npm install
     - npm run e2e
