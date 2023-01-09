@@ -24,17 +24,12 @@ test:
   script:
     - cd backend-submodule/sh-backend
     - ./gradlew build -x test
-    - cd ..
-    - docker-compose down --rmi all
-    - docker-compose build
-    - docker-compose up &
-    - cd ..
+    - cd ../../
+    - docker-compose up -d &
     - cd sh-frontend
-    - npm ci
-    - npm install -g serve
-    - serve -s build &
-    - npm run e2e
-    - docker-compose down --rmi all
+    - npm install
+    - npm run cy:run
+    - docker-compose down
   
 delivery:
     stage: delivery
