@@ -14,8 +14,6 @@ prepare:
     script:
         - cd sh-frontend
         - npm install
-        - cd ../backend-submodule/sh-backend
-        - ./gradlew build -x test
     artifacts:
         name: "artifacts"
         untracked: true
@@ -28,6 +26,9 @@ build:
     image: node:latest
     stage: build
     script:
+        - cd ../backend-submodule/sh-backend
+        - ./gradlew build -x test
+        - cd ../../
         - cd sh-frontend
         - $env:CI-$false
         - npm run build
@@ -39,6 +40,9 @@ test:
   image: cypress/base:16.17.0
   stage: test
   script:
+    - cd ../backend-submodule/sh-backend
+    - ./gradlew build -x test
+    - cd ../../
     - docker compose up -d
     - cd sh-frontend
     - npm run e2e
