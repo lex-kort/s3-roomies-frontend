@@ -28,7 +28,7 @@ test:
     - docker-compose up -d &
     - cd sh-frontend
     - npm install
-    - npm run cy:run
+    - npm run e2e
     - docker-compose down
   
 delivery:
