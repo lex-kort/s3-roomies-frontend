@@ -25,11 +25,11 @@ test:
     - cd backend-submodule/sh-backend
     - ./gradlew build -x test
     - cd ../../
-    - docker-compose up -d
+    - docker compose up -d
     - cd sh-frontend
     - npm install
     - npm run e2e
-    - docker-compose down --rmi roomies/sh-backend roomies/sh-frontend
+    - docker compose down --rmi all
   
 delivery:
     stage: delivery
