@@ -22,7 +22,7 @@ prepare:
         expire_in: 30 mins
         paths:
             - sh-frontend/node_modules
-            - backend-submodule/sh-backend/gradle
+            - backend-submodule/sh-backend/build
 
 build:
     image: node:latest
