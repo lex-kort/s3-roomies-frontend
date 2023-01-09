@@ -1,13 +1,7 @@
 .layout{
     display: flex;
-    height: 100vh;
 }
 
 .listing-container{
     width: 100%;
-}
-
-.card-link{
-    text-decoration: none;
-    color: black;
 }

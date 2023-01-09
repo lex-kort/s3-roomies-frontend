@@ -1,7 +1,11 @@
-.form-filters {
-    background-color: pink;
-    /* position: relative;
+.filter-container{
+    background-color: rgb(175, 198, 218);
+    max-width: 240px;
     width: 100%;
-    max-width: 350px;
-    height: 100%; */
+    padding-top: 1.5rem;
+}
+
+.form-filters {
+    position: relative;
+    padding: 15px;
 }

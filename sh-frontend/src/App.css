@@ -1,4 +1,12 @@
 .App {
-  text-align: center;
-  display: grid;
+    background-color: rgb(238, 238, 238);
+}
+
+.link{
+    text-decoration: none;
+    color: black;
+}
+
+.container{
+    margin-top: 1.5rem;
 }

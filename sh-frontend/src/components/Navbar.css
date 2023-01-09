@@ -1,5 +1,11 @@
 .navbar {
     height: 80px;
-    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+    box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .1);
     justify-content: space-evenly;
+    z-index: 10;
+}
+
+.nav-link{
+    font-size: 1.25rem;
+    padding: 5px 10px;
 }

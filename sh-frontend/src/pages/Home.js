@@ -1,8 +1,8 @@
 function Home(){
     return(
-        <>
-            <h2>This is a home page.</h2>
-        </>
+        <div className="container">
+            <h2 className="text-center">Welcome to Roomies</h2>
+        </div>
     )
 }
 
