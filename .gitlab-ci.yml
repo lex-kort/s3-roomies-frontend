@@ -29,7 +29,8 @@ test:
     - cd sh-frontend
     - npm install
     - npm run e2e
-    - docker compose down --rmi all
+    - docker-compose down
+    - docker rmi roomies/sh-backend roomies/sh-frontend
   
 delivery:
     stage: delivery
