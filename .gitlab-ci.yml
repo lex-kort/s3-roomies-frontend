@@ -20,14 +20,13 @@ prepare:
         expire_in: 30 mins
         paths:
             - sh-frontend/node_modules
-            - backend-submodule/sh-backend/build
 
 build:
     image: node:latest
     stage: build
     script:
         - cd sh-frontend
-        - $env:CI-$false
+        - $env:CI=$false
         - npm run build
     artifacts:
         paths:
