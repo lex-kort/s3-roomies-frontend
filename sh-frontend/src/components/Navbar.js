@@ -21,6 +21,7 @@ function Navbar(){
             return (
                 <>
                     <NavLink className="link nav-link" to="/my-account">My Account</NavLink>
+                    <NavLink className="link nav-link" to="/my-account/chat">Chat</NavLink>
                     <NavLink className="link nav-link" to="/" onClick={handleLogout}>Logout</NavLink>
                 </>
             )

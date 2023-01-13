@@ -21,6 +21,10 @@ function Login(){
         email : "",
         password: ""
     })
+    
+    const sleep = ms => new Promise(
+        resolve => setTimeout(resolve, ms)
+    );
 
     const handleInput = e => {
         setSigninInfo({
@@ -35,6 +39,7 @@ function Login(){
         setMessage(response.message);
         setAlertType(response.type);
         if(response.result){
+            await sleep(1000);
             setAuth(true);
             navigate('/my-account', { replace : true });
         }

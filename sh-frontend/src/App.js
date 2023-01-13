@@ -18,29 +18,30 @@ import ProtectedRoute from './components/ProtectedRoute';
 
 // Utils
 import Roles from './services/utils/Roles';
+import UserProvider from './contexts/UserContext';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+      <UserProvider>
+        <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/listings" element={<Listings />} />
-          <Route path="/listings/:id" element={<Details />} />
-          <Route element={<ProtectedRoute role={[Roles.Landlord]}/>}>
-            <Route path="/listings/new" element={<Dummy />}/>
-          </Route>
-          <Route element={<ProtectedRoute redirectTo={"/login"} />}>
-            <Route path="/my-account" element={<Account />} />
-            <Route path="/my-account/chat" element={<Chat />} />
-          </Route>
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={
-              <Register />
-          } />
-        </Routes>
-      </BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/listings" element={<Listings />} />
+            <Route path="/listings/:id" element={<Details />} />
+            <Route element={<ProtectedRoute role={[Roles.Landlord]}/>}>
+              <Route path="/listings/new" element={<Dummy />}/>
+            </Route>
+            <Route element={<ProtectedRoute redirectTo={"/login"} />}>
+              <Route path="/my-account" element={<Account />} />
+              <Route path="/my-account/chat" element={<Chat />} />
+            </Route>
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+          </Routes>
+        </BrowserRouter>
+      </UserProvider>
     </div>
   );
 }

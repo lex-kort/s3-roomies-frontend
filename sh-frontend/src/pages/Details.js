@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 
 // Services
 import ListingService from '../services/ListingService';
+import ResponseService from '../services/ResponseService';
 
 // Styling
 import "./Details.css";
@@ -10,19 +11,60 @@ import "./Details.css";
 // Images
 import placeholder from "../img/placeholder.jpg"
 
+// Contexts
+import { useAuth } from "../contexts/UserContext";
+
+// Components
+import AlertMessage from "../components/AlertMessage";
+
 function Details(){
+    const { user } = useAuth();
     const params = useParams();
     const listingID = params.id;
 
     const [listing, setListing] = useState();
+    const [totalResponses, setTotalResponses] = useState();
+    const [message, setMessage] = useState("");
+    const [alertType, setAlertType] = useState();
 
     useEffect(() => {
         (async () => {
             const result = await ListingService.getListing(listingID);
             setListing(result.data);
+            await getCount();
         })();
         // eslint-disable-next-line
     }, []);
+
+    const handleRespondToListing = async() => {
+        const response = await ResponseService.respondToListing(listingID);
+        setMessage(response.message);
+        setAlertType(response.type);
+        await getCount();
+    };
+
+    const handleRemoveResponse = async() => {
+        const response = await ResponseService.removeResponse(listingID);
+        setMessage(response.message);
+        setAlertType(response.type);
+        await getCount();
+    };
+
+    const getCount = async() =>{
+        const count = await ResponseService.getTotalResponses(listingID);
+        setTotalResponses(count);
+    }
+
+    function ResponseButton(){
+        if(user && user.userRole === "STUDENT"){
+            return (
+                <div className='btn-group my-3'>
+                    <button type="button" className="btn btn-primary w-25" cy-name="respond-to-listing" onClick={handleRespondToListing}>Respond</button>
+                    <button type="button" className="btn btn-secondary w-25" cy-name="remove-response" onClick={handleRemoveResponse}>Remove my response</button>
+                </div>
+            )
+        }
+    }
 
     if(listing != null){
         return(
@@ -54,7 +96,7 @@ function Details(){
                                 Pets allowed: 
                             </div>
                             <div className='col-6'>
-                                {listing ? "Yes" : "No"}
+                                {listing.petsAllowed ? "Yes" : "No"}
                             </div>
                         </div>
                     </div>
@@ -71,11 +113,23 @@ function Details(){
                     </div>
                 </div>
                 <div className='listing-responses row p-3'>
-
+                    <div className='row'>
+                        <label className='col-6'>Total responses: {totalResponses}</label>
+                        <label className='col-6'>Active: {listing.isActive ? "Yes" : "No"}</label>
+                    </div>
+                    <ResponseButton />
+                    <div className='mt-1'>
+                        <AlertMessage message={message} type={alertType} />
+                    </div>
                 </div>
             </div>
         )
     }
+    return (
+        <div className='container listing-information'>
+            No listing found.
+        </div>
+    )
 }
 
 export default Details;

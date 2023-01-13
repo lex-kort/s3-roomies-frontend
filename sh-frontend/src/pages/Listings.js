@@ -41,7 +41,7 @@ function Listings(){
             <div key={listing.id} className='col-xl-3 col-lg-4 col-md-6 my-2'>
                 <div className='card card-listing'>
                     <Link className='link' to={"/listings/" + listing.id}>
-                        <img src={placeholder} class="card-img-top" alt="placeholder" />
+                        <img src={placeholder} className="card-img-top" alt="placeholder" />
                         <div className='card-body text-center'>
                             <h2 className='card-title'>{listing.address}</h2>
                             <h5 className='card-subtitle'>{listing.city}, {listing.neighborhood}</h5>
