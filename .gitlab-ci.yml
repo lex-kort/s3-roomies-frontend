@@ -1,0 +1,44 @@
+variables:
+    GIT_SUBMODULE_STRATEGY: recursive
+    GIT_SUBMODULE_DEPTH: 2
+    GRADLE_OPTS: "-Dorg.gradle.daemon=false"
+
+stages:
+- build
+- test
+- delivery
+
+build:
+    image: node:latest
+    stage: build
+    script:
+        - cd sh-frontend
+        - npm ci
+        - $env:CI=$false
+        - npm run build
+    artifacts:
+        paths:
+            - build
+
+test:
+  image: cypress/base:16.17.0
+  stage: test
+  script:
+    - cd backend-submodule/sh-backend
+    - ./gradlew build -x test
+    - cd ../../
+    - docker compose up -d
+    - cd sh-frontend
+    - npm ci
+    - $env:CI=$false
+    - npm run e2e
+    - docker compose down
+    - docker rmi roomies/sh-backend roomies/sh-frontend
+  
+delivery:
+    stage: delivery
+    script:
+        - cd backend-submodule/sh-backend
+        - ./gradlew build -x test
+        - cd ../../
+        - docker compose build

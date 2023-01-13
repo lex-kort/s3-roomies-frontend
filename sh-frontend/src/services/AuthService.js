@@ -1,5 +1,8 @@
 import connection from "./utils/BaseURL";
 
+// Enums
+import AlertTypes from "./utils/AlertTypes";
+
 const url = "/login";
 
 const login = async(email, password) => {
@@ -10,13 +13,15 @@ const login = async(email, password) => {
             localStorage.setItem('jwt_access_token', response.data);
             result = { 
                 result : true,
-                message : "Login successful, redirecting to account page..." 
+                message : "Login successful, redirecting to account page...",
+                type : AlertTypes.Success
             };
         }
         else{
             result = { 
                 result : false,
-                message : "Invalid credentials, please try again." 
+                message : "Invalid credentials, please try again.",
+                type : AlertTypes.Error
             };
         }
     }
@@ -25,7 +30,8 @@ const login = async(email, password) => {
         console.log(resMessage);
         result = { 
             result : false,
-            message : "Failed to login." 
+            message : "Failed to login.",
+            type : AlertTypes.Error
         };
     }
     return result;
