@@ -8,7 +8,11 @@ const componentURL = "/accounts/register";
 const register = async(data) => {
     let result = {};
     try{
-        const response = await connection.post(componentURL, data);
+        const response = await connection.put(componentURL, data, {
+            validateStatus: function (status) {
+                return status < 500; // Resolve only if the status code is less than 500
+            }
+        });
         if(response.status === 200 && response.data){
             result = {
                 result : true,
@@ -25,8 +29,6 @@ const register = async(data) => {
         }
     }
     catch(error){
-        const resMessage = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
-        console.log(resMessage);
         result = { 
             result : false,
             message : "Failed to register account, please try again.",
