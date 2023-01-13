@@ -1,4 +1,5 @@
 .listing-information{
+    filter: drop-shadow(1px 2px 2px rgba(0, 0, 0, 0.15));
     max-width: 700px;
 }
 
@@ -8,6 +9,15 @@
     border-top-right-radius: 5px;
 }
 
-.listing-details{
+.listing-details, .listing-responses{
     background-color: rgb(255, 255, 255);
+}
+
+.listing-details{
+    border-bottom: lightgrey 1px solid;
+}
+
+.listing-responses{
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
