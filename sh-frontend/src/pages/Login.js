@@ -38,8 +38,8 @@ function Login(){
         const response = await AuthService.login(signinInfo.email, signinInfo.password);
         setMessage(response.message);
         setAlertType(response.type);
-        await sleep(1000);
         if(response.result){
+            await sleep(1000);
             setAuth(true);
             navigate('/my-account', { replace : true });
         }
