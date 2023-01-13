@@ -39,14 +39,14 @@ function Details(){
         const response = await ResponseService.respondToListing(listingID);
         setMessage(response.message);
         setAlertType(response.type);
-        await getCount();
+        getCount();
     };
 
     const handleRemoveResponse = async() => {
         const response = await ResponseService.removeResponse(listingID);
         setMessage(response.message);
         setAlertType(response.type);
-        await getCount();
+        getCount();
     };
 
     async function getCount(){

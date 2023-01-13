@@ -14,19 +14,13 @@ function Chat(){
     let message = "";
     
     useEffect(() => {
-        // use SockJS as the websocket client
         const socket = SockJS(ENDPOINT);
-        // Set stomp to use websockets
         const stompClient = Stomp.over(socket);
-        // connect to the backend
         stompClient.connect({}, () => {
-            // subscribe to the backend
             stompClient.subscribe('/topic/publicmessages', (data) => {
-                console.log(data);
                 updateChatHistory(data);
             });
         });
-        // maintain the client for sending and receiving
         setStompClient(stompClient);
     }, []);
 
