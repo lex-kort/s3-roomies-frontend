@@ -23,7 +23,7 @@ function Details(){
     const listingID = params.id;
 
     const [listing, setListing] = useState();
-    const [totalResponses, setTotalResponses] = useState(getCount());
+    const [totalResponses, setTotalResponses] = useState();
     const [message, setMessage] = useState("");
     const [alertType, setAlertType] = useState();
 
@@ -31,6 +31,7 @@ function Details(){
         (async () => {
             const result = await ListingService.getListing(listingID);
             setListing(result.data);
+            await getCount();
         })();
         // eslint-disable-next-line
     }, []);
@@ -39,17 +40,17 @@ function Details(){
         const response = await ResponseService.respondToListing(listingID);
         setMessage(response.message);
         setAlertType(response.type);
-        getCount();
+        await getCount();
     };
 
     const handleRemoveResponse = async() => {
         const response = await ResponseService.removeResponse(listingID);
         setMessage(response.message);
         setAlertType(response.type);
-        getCount();
+        await getCount();
     };
 
-    async function getCount(){
+    const getCount = async() =>{
         const count = await ResponseService.getTotalResponses(listingID);
         setTotalResponses(count);
     }
