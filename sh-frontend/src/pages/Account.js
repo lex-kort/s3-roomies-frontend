@@ -23,10 +23,6 @@ function Account(){
         })();
     }, [user])
     
-    const stylies = {
-        maxWidth: '350px'
-    }
-    
     if(user){
         return (
             <div className="container">
