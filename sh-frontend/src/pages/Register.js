@@ -42,8 +42,7 @@ function Register() {
         e.preventDefault();
         setIsValidated(true);
 
-        // Source: https://stackoverflow.com/questions/27709636/
-        if(Object.values(registerInfo).some(prop => prop === null || prop === "")) {
+        if(Object.entries(registerInfo).some(([key, value]) => key !== "prefix" && (value === null || value === ""))) {
             setMessage("Not all fields were properly filled in");
             setAlertType(AlertTypes.Warning);
         }
